@@ -1,33 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Menu from './MenuComponent';
-import { DISHES } from '../shared/dishes';
-import Dishdetail from './DishdetailComponent';
-import { View } from "react-native";
+import Home from './HomeComponent';
+import Dishdetail from './DishDetailComponent';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: DISHES,
-      selectedDish : null,
-    };
-  }
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-  onDishSelect(dishId){
-      this.setState({selectedDish : dishId})
-  }
-
-  render() {
- 
-    return (
-        <View style={{flex:1}}>
-            <Menu dishes={this.state.dishes} onPress={(dishId) => this.onDishSelect(dishId)} />
-            <Dishdetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
-        </View>
+function HomePage (){
+    <Stack.Navigator>
+        <Stack.Screen name = "Home" component ={Home}/>
+    </Stack.Navigator>
     
-        
-    );
-  }
 }
-  
+
+function MenuPage (){
+    return(
+        <Stack.Navigator> 
+            <Stack.Screen name = "Menu" component = {Menu}/>
+            <Stack.Screen name = "Dishdetail" component = {Dishdetail}/>
+        </Stack.Navigator>
+    )
+}
+
+const Main = () =>{
+    return (
+        <NavigationContainer>
+            <Drawer.Navigator>
+                <Drawer.Screen name = "Home " component = {Home} />
+                <Drawer.Screen name = "Menu" component= {Menu}/>
+            </Drawer.Navigator>
+        </NavigationContainer>
+    )
+}
+
 export default Main;
