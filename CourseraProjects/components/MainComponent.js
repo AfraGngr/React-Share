@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import Menu from './MenuComponent';
 import Home from './HomeComponent';
 import Dishdetail from './DishDetailComponent';
+import About from "./AboutComponent";
 import {View, Platform} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import ContactUs from './ContactComponent';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -42,6 +44,7 @@ function HomePage() {
   );
 }
 
+
 const Main = () => {
   return (
     <NavigationContainer style={{flex: 1, paddingTop: 10}}>
@@ -52,6 +55,8 @@ const Main = () => {
         }}>
         <Drawer.Screen name="Home" component={HomePage} />
         <Drawer.Screen name="Menu" component={MenuPage} />
+        <Drawer.Screen name="About Us" component = {About}/>
+        <Drawer.Screen name="Contact Us" component = {ContactUs}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
