@@ -1,15 +1,6 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  FlatList,
-  Image,
-  Text,
-  StatusBar,
-} from 'react-native';
-import {ListItem, Avatar} from 'react-native-elements';
+import {FlatList} from 'react-native';
+import {ListItem} from 'react-native-elements';
 import {DISHES} from '../shared/dishes';
 
 function Menu(props) {
@@ -33,7 +24,7 @@ function Menu(props) {
         <FlatList
          data={dishes}
          renderItem={renderMenuItem}
-      keyExtractor={(item, index) => item.id.toString()}
+        keyExtractor={(item, index) => item.id.toString()}
     />
   );
 }
