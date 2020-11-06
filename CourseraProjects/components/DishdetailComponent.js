@@ -15,6 +15,14 @@ function RenderDish(props) {
         {/* <Card.FeaturedTitle>{dish.name}</Card.FeaturedTitle> */}
         {/* <Card.Image source={require('./images/uthappizza.png')} /> */}
         <Text style={{margin: 10}}>{dish.description}</Text>
+        <Icon 
+          raised
+          reverse
+          name = {props.favorite ? "heart" : "heart-o"}
+          type = "font-awesome"
+          color = "#f50"
+          onPress = {() => props.favorite ? alert("Already favorite") : props.onPress() }
+        />
       </Card>
     );
   } else {
@@ -49,10 +57,17 @@ const RenderComments = (props) => {
 function Dishdetail(props) {
   const [dishes, setDishes] = useState(DISHES);
   const [comments, setComments] = useState(COMMENTS);
+  const [favorites, setFavorites] = useState([])
+
   const {dishId} = props.route.params;
+
   return (
     <ScrollView>
-      <RenderDish dish={dishes[dishId]}/>
+      <RenderDish 
+      dish={dishes[dishId]}
+      favorite = {favorites.some(el => el === dishId)}
+      onPress = {() => setFavorites(favorites.concat(dishId))}
+      />
       <RenderComments comments={comments.filter((comment) => dishId === comment.dishId)}/>
     </ScrollView>
   );
